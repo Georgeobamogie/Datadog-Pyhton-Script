@@ -1,0 +1,15 @@
+import datadog
+import time
+
+# Initialize the Datadog client
+options = {
+    'api_key': '<YOUR_DATADOG_API_KEY>',
+    'app_key': '<YOUR_DATADOG_APP_KEY>'
+}
+datadog.initialize(**options)
+
+# Submit custom metrics
+datadog.api.Metric.send(metric='sample.metric', points=time.time(), tags=["env:test"])
+
+# Submit log data
+datadog.api.Log.send(message='This is a sample log', source='sample_app', tags=["env:test"])
